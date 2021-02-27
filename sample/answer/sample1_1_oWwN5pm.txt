@@ -1,0 +1,4 @@
+1. A
+2. B
+3. True
+4. Computer

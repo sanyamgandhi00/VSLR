@@ -1,0 +1,76 @@
+
+<!-- {% extends 'base.html' %} -->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/cer.css' %}">
+{% block content %}
+
+<style>
+
+*{
+        overflow-y: hidden;
+      }
+
+.cert{
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  padding: 2rem;
+  width: 100rem;
+  margin: 10rem;
+}
+</style>
+
+<center>
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="{}"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<div class="cert">
+<h1>{{ college }}</h1>
+<h1 id="cert-title">
+  Certificate of Proficiency
+</h1>
+<br><br><br><br>
+
+<p class="smaller" id="cert-declaration">
+  THIS IS TO CERTIFY THAT
+</p>
+<h1 id="cert-holder">
+  Roll No. {{ roll }}
+</h1>
+
+<p class="smaller" id='cert-completed-line'>
+  has successfully completed the
+</p>
+
+<h2 id="cert-course">
+  {{ name }} in Question with Score <br> {{ score }} %<br>
+</h2>
+
+
+<br>
+<p class="smaller" id='cert-issued'>
+ <b>Subject Code:</b> {{code}}.
+</p>
+</div>
+
+<!-- <div id="cert-footer">
+  <div id="cert-issued-by">
+    <img id="cert-stamp" src="https://i7.pngguru.com/preview/585/794/452/paper-rubber-stamp-postage-stamps-company-seal-seal-thumbnail.jpg">
+    <hr>
+    <p>Issued by<br>{{ college }}</p>
+  </div>
+  <div id="cert-ceo-design">
+    <img id="cert-ceo-sign" src="https://i7.pngguru.com/preview/585/794/452/paper-rubber-stamp-postage-stamps-company-seal-seal-thumbnail.jpg">
+    <hr>
+    <p>Principal<br>Principal of the College</p>
+  </div>
+</div> -->
+</center>
+
+{% endblock content %}

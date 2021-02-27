@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,31 +10,100 @@
     <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 </head>
 <body>
+    <div class="container" style="padding-top: 20px;">
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <!-- <th scope="col">#</th> -->
+        <th scope="col">Roll No.</th>
+        <th scope="col">Code</th>
+        <th scope="col">Score</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in data %}
+      <tr>
+        <td>{{ i.roll }}</td>
+        <td>{{ i.code }}</td>
+        <td>{{ i.score }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+    </div>
+    <br>
+    <br>
+    <center>
     <div id="myChart" style="width: 50rem;"></div>
+</center>
 </body>
 
 <script>
-    var chartData = {
-        "type": "bar",
-        "scale-x":{
-            "values": [
-                "Rasika",
-                "Vaibhavi",
-                "Leesa",
-            ]
-        },
-        "series": [
-            {
-                "values": [
-                    23,16,20
-                ]
-            }
-        ]
+    var dataUrl = `/resultg/`
+    $.ajax({
+        method:'GET',
+        url: dataUrl,
+        success: function(res){
+            console.log('Response: ',res)
+            buildChart(res)
+        }
+    })
+
+    function buildChart(x){
+        var chartData = {
+        "type": "line",
+        "title": {
+    "text": "Score Analytics",
+    "font-size": "24px",
+    "adjust-layout": true
+  },
+        "scale-x": {
+    "min-value": 0,
+    "shadow": 0,
+    "step": 1,
+    "label": {
+      "visible": false
+    },
+    "minor-ticks": 0
+  },
+        "scale-y": {
+    "line-color": "#f6f7f8",
+    "shadow": 0,
+    "guide": {
+      "line-style": "dashed"
+    },
+    "label": {
+      "text": "Scores",
+    },
+    "minor-ticks": 0,
+    "thousands-separator": ","
+  },
+  "crosshair-x": {
+    "line-color": "#efefef",
+    "plot-label": {
+      "border-radius": "5px",
+      "border-width": "1px",
+      "border-color": "#f6f7f8",
+      "padding": "10px",
+      "font-weight": "bold"
+    },
+    "scale-label": {
+      "font-color": "#000",
+      "background-color": "#f6f7f8",
+      "border-radius": "5px"
+    }
+  },
+"series": [{
+    "values": x
+}]
     }
 
     zingchart.render({
         id: "myChart",
         data: chartData,
     })
+    }
 </script>
 </html>
+
+{% endblock content %}

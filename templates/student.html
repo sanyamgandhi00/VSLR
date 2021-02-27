@@ -19,22 +19,24 @@ background-image:  url("../static/images/san.jpg")
 
 
 }
-
+<!--.forms{-->
+<!-- opacity: 0.2;-->
+<!--}-->
     @media only screen and (max-width: 492px ){
             form,fieldset{
-               width : 500px;
+               width : 800px;
                 padding:100px;
             }
 
              @media only screen and (max-width: 478px ){
             form,fieldset{
-               width : 500px;
+               width : 800px;
                 padding:100px;
             }
 
                  @media only screen and (max-width: 432px ){
             form,fieldset{
-               width : 500px;
+               width : 600px;
                 padding:100px;
             }
                      @media only screen and (max-width: 330px ){
@@ -53,11 +55,11 @@ background-image:  url("../static/images/san.jpg")
     <div>
 <form action='/student/' method='POST' enctype="multipart/form-data" style="margin:auto;padding-left:256px;padding-right:256px;">
     {% csrf_token %}
+<br>
 
-
-        <fieldset class="forms" style="border: 2px solid black;padding:100px;background: #F0F8FF ;">
+        <fieldset class="forms" style="border: 2px solid black;padding: 100px;background: #F0F8FF ; padding-top:1.5rem">
             <legend style="color:black;text-decoration:bold;font-size:2.5rem;">UPLOAD STUDENT ANSWER</legend>
-        <div class="form-group">
+        <div class="form-group pt-1 col-md-9" style="margin-top:1rem;font-size:1.5rem">
             <b><label for="Roll">Roll No.</label></b>
             <div>
                 <input class="form-control" id="Roll" name="Roll" type="text" required>
@@ -65,19 +67,28 @@ background-image:  url("../static/images/san.jpg")
         </div>
         <br>
 
-        <div class="form-group">
+        <div class="form-group col-md-9" style="font-size:1.5rem">
             <b> <label for="Code">Subject Code</label></b>
 
         <div>
             <input class="form-control" id="Code" name="Code" type="text" required>
-        </div>
-        </div>
+        </div> </div> <br>
+
+           <div class="form-group col-md-9" style="font-size:1.5rem">
+                <b> <label for="choice">Select Question Paper Type</label></b>
+               <select class="form-control form-control-lg" id="choice" name="choice">
+  <option value="Subjective">Subjective</option>
+  <option value="Objective" >Objective</option>
+
+</select>
+           </div> <br>
+
             <div class="form-group">
-         <label for="Cv" style="height: 50px;">Upload Student Answer</label>
+         <label for="Cv" style="height: 30px;font-size:1.5rem">Upload Student Answer</label>
             <div class="Cv">
                 <p>{{ answer.as_p }}</p>
             </div>
-            </div>
+            </div> <br>
         <div class="row2">
             <input type="submit" id="save" class="btn btn-primary btn-lg btn-block" value="Submit" />
         </div>

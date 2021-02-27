@@ -5,7 +5,7 @@ from django.template.context_processors import request
 from django.views.generic import ListView, DetailView
 from django.urls import reverse_lazy
 from django.shortcuts import render,redirect, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.urls import reverse
@@ -14,6 +14,7 @@ from .grader import inp
 from django.contrib.staticfiles.storage import staticfiles_storage
 import os
 from django.conf import settings
+from .objective import objective
 
 def index(request):
     return render(request, 'index.html')
@@ -22,7 +23,11 @@ def about(request):
     return render(request, 'aboutUs.html')
 
 def graph(request):
-    return render(request, 'graph.html')
+    context = {}
+    data = student_answer.objects.all().order_by('score')
+    context['data'] = data
+    # context['n'] = list(x for x in range(len(data)))
+    return render(request, 'graph.html', context)
 
 
 def signup(request):
@@ -107,12 +112,16 @@ def student_forms(request):
             Answer.save()
             Roll = request.POST['Roll']
             Code = request.POST['Code']
+            Choice = request.POST['choice']
             obj = Answer.instance
             url = sample_answer.objects.filter(code=Code).values_list('sample','college','name')
             print(url)
             student_answer.objects.filter(answer=obj.answer).update(roll=Roll,code=Code)
             url1 = student_answer.objects.filter(code=Code,roll=Roll).values_list('answer',flat=True)
-            Score = inp(os.path.join(settings.MEDIA_ROOT, url[0][0]),os.path.join(settings.MEDIA_ROOT, url1[0]))
+            if Choice=='Subjective':
+                Score = inp(os.path.join(settings.MEDIA_ROOT, url[0][0]),os.path.join(settings.MEDIA_ROOT, url1[0]))
+            elif Choice=='Objective':
+                Score = objective(os.path.join(settings.MEDIA_ROOT, url[0][0]),os.path.join(settings.MEDIA_ROOT, url1[0]))
             student_answer.objects.filter(answer=obj.answer).update(score=Score)
             print(Score)
             context = {
@@ -123,7 +132,7 @@ def student_forms(request):
                 'name':url[0][2],
             }
             print(context)
-        return redirect('home')
+        return render(request, 'result.html', context)
     else:
         Answer = answer_form()
         context['answer'] = Answer
@@ -135,3 +144,11 @@ def check(request):
     student_answer.objects.filter(answer=obj.answer).update(roll=Roll,code=Code)
     print(score)
     return redirect('home')
+
+
+def results_graph(request):
+    context = {}
+    data = student_answer.objects.all().values_list('score', flat=True)
+    context['score'] = list(data)
+    print(list(data))
+    return JsonResponse(list(data), safe = False)

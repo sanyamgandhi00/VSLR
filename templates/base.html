@@ -143,9 +143,9 @@
                 {% if user.is_authenticated %}
                 <a href="{% url 'logout' %}" class="nav-link">LOG OUT</a>
                 <div style="float: right;">
-                <a class="nav-link float-right us" >Hello, {{user.username}}</a>
                 <a href="{% url 'sample' %}" class="nav-link">SAMPLE</a>
                 <a href="{% url 'student' %}" class="nav-link">CHECK</a>
+                <a href="{% url 'graph' %}" class="nav-link">LEADERBOARD</a>
                 </div>
                 {% else %}
                 <a data-toggle="modal" data-target="#loginmodal" class="nav-link">LOG IN</a>
