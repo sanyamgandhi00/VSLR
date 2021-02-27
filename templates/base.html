@@ -1,0 +1,248 @@
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Nrityam</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
+  
+      <!-- Bootstrap CSS File -->
+      <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+      <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel="stylesheet"> 
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"></script> 
+      <!-- Main Stylesheet File -->
+  </head>
+  
+  
+  <style type="text/css">
+  
+      
+      .nav-link{
+        float: right;
+      color: #29292A;
+      text-align: center;
+      text-decoration: none;
+      font-style: bold;
+      font-size: 21px;
+      text-shadow: 2px 2px 3px #FFD700;
+      }
+  
+      .navbar-brand{
+        float: right; 
+        padding-right: 30px; 
+        font-family: MV Boli; 
+        text-shadow: 2px 2px 3px #FFD700; 
+        font-size: 25px; 
+        color:  #29292A;
+      }
+  
+  
+  
+      #img{
+        float: right;
+        width: 800px;
+        padding-left: 100px;
+      }
+      #heading{
+        font-size: 50px;
+        /* padding-top: 20px; */
+      }
+  
+      span{
+        color: darkblue;
+        font-weight: bold;
+      }
+  
+      i{
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+  
+      i:hover{
+        background-color: rgba(255, 71, 26, 0.2);
+      }
+
+      
+    .gallery-block {
+      padding-bottom: 60px;
+      padding-top: 60px;
+    }
+    .gallery-block .heading {
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .gallery-block .heading h2 {
+      font-weight: bold;
+      font-size: 3rem;
+      text-transform: uppercase;
+    }
+
+    .gallery-block.cards-gallery h6 {
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .gallery-block.cards-gallery .card {
+      transition: 0.4s easy;
+    }
+    .gallery-block.cards-gallery .card img {
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+    }
+    .gallery-block.cards-gallery .card-body {
+      text-align: center;
+    }
+    .gallery-block.cards-gallery .card-body p {
+      font-size: 15px;
+    }
+    .gallery-block.cards-gallery a {
+      color: #212529;
+    }
+    .gallery-block.cards-gallery a:hover {
+      text-decoration: none;
+    }
+    .gallery-block.cards-gallery .card {
+      margin-bottom: 30px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    @media (min-width: 576px) {
+      .gallery-block .transform-on-hover:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.15) !important;
+      }
+    }
+  </style>
+  <body>
+  
+    <nav class="navbar blue-gradient sticky-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">GRADEASY</a>
+                <a href="{% url 'home' %}" class="nav-link">ABOUT</a>
+                
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="nav-link">LOG OUT</a>
+                <div style="float: right;">
+                <a class="nav-link" >Hello, {{user.username}}</a>
+                <a href="{% url 'sample' %}" class="nav-link">SAMPLE</a>
+                <a href="{% url 'student' %}" class="nav-link">CHECK</a>
+                </div>
+                {% else %}
+                <a data-toggle="modal" data-target="#loginmodal" class="nav-link">LOG IN</a>
+                <a data-toggle="modal" data-target="#elegantRegisterForm" class="nav-link">SIGN UP</a>
+                {% endif %}
+                
+                
+    </nav>
+
+    <!-- LOGIN FORM -->
+<div class="modal fade" id="loginmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+  <!--Content-->
+    <form method="POST" action="/login/">
+      {% csrf_token %}
+      <div class="modal-content form-elegant">
+        <!--Header-->
+        <div class="modal-header blue-gradient text-center">
+          <h4 class="modal-title white-text w-100 font-weight-bold py-2">Login</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="white-text">&times;</span>
+          </button>
+        </div>
+        <!--Body-->     
+        <div class="modal-body mx-4">
+          <!--Body-->
+          <div class="md-form mb-3">
+            <input type="text" id="Form-usernamelogin" class="form-control validate" name="Form-usernamelogin">
+            <label data-error="wrong" data-success="right" for="Form-username">Enter Username</label>
+          </div>
+
+          <div class="md-form mb-3">
+            <input type="password" id="Form-passlogin1" class="form-control validate" name="Form-passlogin1">
+            <label data-error="wrong" data-success="right" for="Form-pass1">Enter Password</label>
+          </div>
+         
+
+          <div class="text-center mb-3">
+            <button type="submit" class="btn peacblueh-gradient btn-block btn-rounded z-depth-1a">Sign in</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!--/.Content-->
+  </div>
+</div>
+
+<!-- REGISTER FORM -->
+<div class="modal fade" id="elegantRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <!--Content-->
+  <form action="/signup/" method="POST">
+    {% csrf_token %}
+    <div class="modal-content form-elegant">
+      <!--Header-->
+      <div class="modal-header blue-gradient text-center">
+        <h4 class="modal-title white-text w-100 font-weight-bold py-2">Register</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+      <!--Body-->
+      <div class="modal-body mx-4">
+        <!--Body-->
+            <div class="md-form mb-2">
+          <input type="text" id="Form-name" class="form-control validate" name="Form-name" required>
+          <label data-error="wrong" data-success="right" for="Form-name">Enter Name</label>
+        </div>
+
+        <div class="md-form mb-2">
+          <input type="text" id="Form-username" class="form-control validate" name="Form-username" required>
+          <label data-error="wrong" data-success="right" for="Form-username">Enter Username</label>
+        </div>
+
+        <div class="md-form mb-2">
+          <input type="email" id="Form-email1" class="form-control validate" name="Form-email1" required>
+          <label data-error="wrong" data-success="right" for="Form-email1">Enter Email</label>
+        </div>
+
+        <div class="md-form mb-2">
+          <input type="password" id="Form-pass1" class="form-control validate" name="Form-pass1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+          <label data-error="wrong" data-success="right" for="Form-pass1">Enter Password</label>
+        </div>
+    
+        <div class="md-form mb-2">
+          <input type="password" id="Form-pass2" class="form-control validate" name="Form-pass2" required>
+          <label data-error="wrong" data-success="right" for="Form-pass2" onchange="validateForm()">Confirm Password</label>
+        </div>
+
+        <div class="text-center mb-2">
+          <button type="submit" class="btn blue-gradient btn-block btn-rounded z-depth-1a">Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!--/.Content-->
+</div>
+</div>
+
+  
+{% block content %}
+{% endblock content %}
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  *{
+        overflow-y: hidden;
+      }
+</style>
+
+<section id="intro" class="clearfix">  
+  <div class="container d-flex h-100">
+    <div class="row justify-content-center align-self-center">
+      <div class="col-md-6 intro-info order-md-first order-last my-auto" id="head">
+        <h2 id="heading">Check<br>Answer Sheets<span>&nbsp; Easily!</span></h2>
+        <div style="text-align: center; font-size: 40px;">
+        <i class="fa fa-linkedin" aria-hidden="true"></i>
+        <i class="fa fa-instagram" aria-hidden="true"></i>
+        <i class="fa fa-youtube" aria-hidden="true"></i>
+        
+        {% if messages %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <div style="color: black; font-size: 12px;">
+                  {% for message in messages %}
+              {{ message }}
+                  {% endfor %}
+              </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      
+
+      <div class="col-md-6 intro-img order-md-last order-first">
+        <img id="img" src="https://previews.123rf.com/images/kostsov/kostsov1406/kostsov140600194/29411412-grade-box-on-an-exam-paper-isolated-on-a-white-background-3d-render.jpg" alt="" class="img-fluid ">
+      </div>
+      
+    </div>
+  </div>
+</section><!-- #intro -->
+
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<style>
+    @media only screen and (max-width: 492px ){
+            form,fieldset{
+               width : 800px;
+                padding:100px;
+            }
+
+             @media only screen and (max-width: 478px ){
+            form,fieldset{
+               width : 800px;
+                padding:100px;
+            }
+
+                 @media only screen and (max-width: 432px ){
+            form,fieldset{
+               width : 600px;
+                padding:100px;
+            }
+                     @media only screen and (max-width: 330px ){
+            form,fieldset{
+               width : 600px;
+                padding:100px;
+            }
+                     }
+                 }
+             }
+    }
+
+</style>
+<center>
+    <div>
+<form action='/sample/' method='POST' enctype="multipart/form-data" style="margin:auto;padding:100px;">
+    {% csrf_token %}
+      <br>
+
+        <fieldset style="border: 2px solid black;padding:100px;background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);">
+            <legend style="color:black;font-family: 'Sansita Swashed', cursive;font-size:3rem;">UPLOAD SAMPLE ANSWER</legend>
+        <div class="form-group">
+            <b><label for="Name">Subject Name</label></b>
+            <div>
+                <input class="form-control" id="Name" name="Name" type="text" required>
+            </div>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <b> <label for="Code">Subject Code</label></b>
+
+        <div>
+            <input class="form-control" id="Code" name="Code" type="text" required>
+        </div>
+        </div>
+<br>
+
+            <div class="form-group">
+            <b><label for="Email">Email Id</label></b>
+            <div>
+                <input class="form-control" id="Email" name="Email" type="email" required>
+            </div>
+            </div>
+
+        <br>
+        
+
+
+            <div class="form-group">
+                <b> <label for="College">College Name</label></b>
+
+            <div>
+                <input class="form-control" id="College" name="College" type="text" required>
+            </div>
+            </div>
+    <br>
+
+            <div class="form-group">
+         <label for="Cv" style="height: 150px;">Upload Sample Answer</label>
+            <div class="Cv">
+                <p>{{ sample.as_p }}</p>
+            </div>
+            </div>
+    <br>
+        <div class="row2">
+            <input type="submit" id="save" class="btn btn-primary btn-lg btn-block" value="Submit" />
+        </div>
+</fieldset>
+</form>
+        </div>
+    </center>
+
+{% endblock content %}
