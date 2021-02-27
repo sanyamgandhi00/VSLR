@@ -18,6 +18,9 @@ from django.conf import settings
 def index(request):
     return render(request, 'index.html')
 
+def about(request):
+    return render(request, 'aboutUs.html')
+
 def graph(request):
     return render(request, 'graph.html')
 
@@ -105,7 +108,21 @@ def student_forms(request):
             Roll = request.POST['Roll']
             Code = request.POST['Code']
             obj = Answer.instance
+            url = sample_answer.objects.filter(code=Code).values_list('sample','college','name')
+            print(url)
             student_answer.objects.filter(answer=obj.answer).update(roll=Roll,code=Code)
+            url1 = student_answer.objects.filter(code=Code,roll=Roll).values_list('answer',flat=True)
+            Score = inp(os.path.join(settings.MEDIA_ROOT, url[0][0]),os.path.join(settings.MEDIA_ROOT, url1[0]))
+            student_answer.objects.filter(answer=obj.answer).update(score=Score)
+            print(Score)
+            context = {
+                'score': Score,
+                'code':Code,
+                'roll': Roll,
+                'college':url[0][1],
+                'name':url[0][2],
+            }
+            print(context)
         return redirect('home')
     else:
         Answer = answer_form()
@@ -115,5 +132,6 @@ def student_forms(request):
 
 def check(request):
     score = inp(os.path.join(settings.STATIC_ROOT, 'sample1.txt'),os.path.join(settings.STATIC_ROOT, 'sample2.txt'))
+    student_answer.objects.filter(answer=obj.answer).update(roll=Roll,code=Code)
     print(score)
     return redirect('home')

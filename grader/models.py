@@ -17,6 +17,7 @@ class student_answer(models.Model):
     roll = models.CharField(max_length=255)
     code = models.CharField(max_length=255,null=False,blank=False)
     answer = models.FileField(upload_to='answer', blank=False, null=False)
+    score = models.CharField(max_length=255)
 
     def __str__(self):
         return self.roll

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+<!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">-->
     <!-- Bootstrap core CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
@@ -35,21 +35,26 @@
       
       .nav-link{
         float: right;
-      color: #29292A;
+      color: white;
       text-align: center;
       text-decoration: none;
       font-style: bold;
       font-size: 21px;
-      text-shadow: 2px 2px 3px #FFD700;
       }
   
       .navbar-brand{
-        float: right; 
+         float: right;
+         color: white;
         padding-right: 30px; 
         font-family: MV Boli; 
         text-shadow: 2px 2px 3px #FFD700; 
-        font-size: 25px; 
-        color:  #29292A;
+        font-size: 25px;
+        text-decoration: bold;
+      }
+
+      .us{
+         padding-left: 20rem;
+
       }
   
   
@@ -131,14 +136,14 @@
   </style>
   <body>
   
-    <nav class="navbar blue-gradient sticky-top navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'home' %}">GRADEASY</a>
-                <a href="{% url 'home' %}" class="nav-link">ABOUT</a>
-                
+    <nav class="navbar blue-gradient navbar-light bg-light sticky-top navbar-expand-lg ">
+        <a class="navbar-brand text-uppercase" href="{% url 'home' %}">GRADEASY</a>
+                <a href="{% url 'aboutUs' %}" class="nav-link">ABOUT</a>
+
                 {% if user.is_authenticated %}
                 <a href="{% url 'logout' %}" class="nav-link">LOG OUT</a>
                 <div style="float: right;">
-                <a class="nav-link" >Hello, {{user.username}}</a>
+                <a class="nav-link float-right us" >Hello, {{user.username}}</a>
                 <a href="{% url 'sample' %}" class="nav-link">SAMPLE</a>
                 <a href="{% url 'student' %}" class="nav-link">CHECK</a>
                 </div>
@@ -146,8 +151,8 @@
                 <a data-toggle="modal" data-target="#loginmodal" class="nav-link">LOG IN</a>
                 <a data-toggle="modal" data-target="#elegantRegisterForm" class="nav-link">SIGN UP</a>
                 {% endif %}
-                
-                
+
+
     </nav>
 
     <!-- LOGIN FORM -->

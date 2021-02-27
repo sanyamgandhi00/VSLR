@@ -10,6 +10,8 @@ Original file is located at
 """## Idhar se Dekh.
 
 """
+import os
+from django.conf import settings
 def inp(sample1,sample2):
     global s1
     s1 = sample1
@@ -51,7 +53,7 @@ def inp(sample1,sample2):
         print([[dictionary[id], np.around(freq, decimals=2)] for id, freq in doc])
 
     # building the index
-    sims = gensim.similarities.Similarity('workdir/',tf_idf[corpus],
+    sims = gensim.similarities.Similarity(os.path.join(settings.STATIC_ROOT, 'workdir'),tf_idf[corpus],
                                             num_features=len(dictionary))
 
     sims
@@ -106,8 +108,15 @@ def inp(sample1,sample2):
     # calculate total average
     total_avg = np.sum(avg_sims, dtype=np.float)
     # round the value and multiply by 100 to format it as percentage
-    percentage_of_similarity = round(float(total_avg) * 100)
+    percentage_of_similarity = round(float(total_avg) * 100)/len(file_docs)
     # if percentage is greater than 100
     # that means documents are almost same
-    if percentage_of_similarity >= 100:
-        percentage_of_similarity = 100
+    if percentage_of_similarity >= 75:
+        print('80 - accuracy')
+    elif percentage_of_similarity >= 50:
+        print('50 - accuracy')
+    elif percentage_of_similarity >= 25:
+        print('25 - accuracy')
+    else:
+        print('0 - accuracy')
+    return percentage_of_similarity
