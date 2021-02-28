@@ -11,4 +11,7 @@
  Run `pip insatll manage.py makemigrations`<br/>
  Run `pip install manage.py migrate`<br/>
  Run `pip install manage.py runserver`<br/>
+ 
+ # Project Demo
+ ![plot]('C:/Users/USER/Desktop/DS_Vaibhavi/ss1.png')
 
