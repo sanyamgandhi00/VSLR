@@ -15,12 +15,19 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 import os
 from django.conf import settings
 from .objective import objective
+from .utils import render_to_pdf
+from io import BytesIO
+from django.template.loader import get_template
+from xhtml2pdf import pisa  
 
 def index(request):
     return render(request, 'index.html')
 
 def about(request):
     return render(request, 'aboutUs.html')
+
+def result(request):
+    return render(request, 'result.html')
 
 def graph(request):
     context = {}
@@ -132,7 +139,10 @@ def student_forms(request):
                 'name':url[0][2],
             }
             print(context)
-        return render(request, 'result.html', context)
+            pdf = render_to_pdf('result.html',context)
+         
+         #rendering the template
+            return HttpResponse(pdf, content_type='application/pdf')
     else:
         Answer = answer_form()
         context['answer'] = Answer
@@ -140,9 +150,16 @@ def student_forms(request):
 
 
 def check(request):
-    score = inp(os.path.join(settings.STATIC_ROOT, 'sample1.txt'),os.path.join(settings.STATIC_ROOT, 'sample2.txt'))
-    student_answer.objects.filter(answer=obj.answer).update(roll=Roll,code=Code)
-    print(score)
+    from pdf2image import convert_from_path 
+# Store Pdf with convert_from_path function
+
+    images = convert_from_path(os.path.join(settings.STATIC_ROOT, 'sanyam.pdf'),poppler_path = r'C:\Program Files\poppler-21.01.0\Library\bin') 
+
+    for i in range(len(images)): 
+
+      # Save pages as images in the pdf 
+
+        images[i].save('page'+ str(i) +'.jpg', 'JPEG')
     return redirect('home')
 
 

@@ -1,5 +1,4 @@
 
-<!-- {% extends 'base.html' %} -->
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/cer.css' %}">
 {% block content %}
@@ -10,7 +9,7 @@
         overflow-y: hidden;
       }
 
-.cert{
+/* .cert{
   border-top-style: solid;
   border-right-style: solid;
   border-bottom-style: solid;
@@ -18,6 +17,84 @@
   padding: 2rem;
   width: 100rem;
   margin: 10rem;
+} */
+.cert{
+  font-size: 2rem;
+
+}
+div#cert-footer {
+  position: absolute;
+  width: 60%;
+  top: 550px;
+  text-align: center;
+}
+
+#cert-stamp, #cert-ceo-sign {
+  width: 60%;
+  display: inline-block;
+}
+
+div#cert-issued-by, div#cert-ceo-design {
+  width: 40%;
+  display: inline-block;
+  float: left;
+}
+
+div#cert-ceo-design {
+  margin-left: 10%;
+}
+
+h1 {
+  font-family: 'Saira Condensed', sans-serif;
+  margin: 5px 0px;
+}
+
+body {
+  width: 950px;
+  height: 690px;
+  position: absolute;
+  left: 30px;
+  top: 30px;
+}
+
+p {
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  margin: 5px 0px;
+}
+
+html {
+  display: inline-block;
+  width: 1024px;
+  height: 768px;
+  background: #eee url("https://i.pinimg.com/originals/b3/17/db/b317db24945589699a4ef18150dc5b73.jpg") no-repeat; background-size: 100%;
+}
+
+h1#cert-holder {
+  font-size: 40px;
+  color: #be2d24;
+}
+
+p.smaller {
+  font-size: 27px !important;
+}
+
+div#cert-desc {
+  width: 70%;
+}
+
+p#cert-from {
+  color: #be2d24;
+  font-family: 'Saira Condensed', sans-serif;
+}
+
+div#cert-verify {
+  opacity: 1;
+  position: absolute;
+  top: 680px;
+  left: 60%;
+  font-size: 12px;
+  color: grey;
 }
 </style>
 
@@ -25,18 +102,18 @@
 <head>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="stylesheet" href="{}"> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+<div class="bord">
 <div class="cert">
-<h1>{{ college }}</h1>
+<h1 style="  padding-top: 80px;">{{ college }}</h1>
 <h1 id="cert-title">
-  Certificate of Proficiency
+  CERTIFICATE OF PROFICIENCY
 </h1>
-<br><br><br><br>
-
+<hr>
+<br><br>
 <p class="smaller" id="cert-declaration">
   THIS IS TO CERTIFY THAT
 </p>
@@ -45,11 +122,11 @@
 </h1>
 
 <p class="smaller" id='cert-completed-line'>
-  has successfully completed the
+  has successfully completed the {{ name }} subject 
 </p>
 
 <h2 id="cert-course">
-  {{ name }} in Question with Score <br> {{ score }} %<br>
+  with a score of {{ score }} %<br>for the academic year 2020-21<br>
 </h2>
 
 
@@ -58,19 +135,8 @@
  <b>Subject Code:</b> {{code}}.
 </p>
 </div>
+</div>
 
-<!-- <div id="cert-footer">
-  <div id="cert-issued-by">
-    <img id="cert-stamp" src="https://i7.pngguru.com/preview/585/794/452/paper-rubber-stamp-postage-stamps-company-seal-seal-thumbnail.jpg">
-    <hr>
-    <p>Issued by<br>{{ college }}</p>
-  </div>
-  <div id="cert-ceo-design">
-    <img id="cert-ceo-sign" src="https://i7.pngguru.com/preview/585/794/452/paper-rubber-stamp-postage-stamps-company-seal-seal-thumbnail.jpg">
-    <hr>
-    <p>Principal<br>Principal of the College</p>
-  </div>
-</div> -->
 </center>
 
 {% endblock content %}
