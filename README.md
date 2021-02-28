@@ -1,6 +1,6 @@
 # VSLR
 ## Problem Statement - 2
-######  **Auto-Grader(ML) - Develpoment of software to automatically read and grade from scanned documen
+######  **Auto-Grader(ML) - Develpoment of software to automatically read and grade from scanned document**
 
 
 # Get Startted with the project
