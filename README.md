@@ -5,10 +5,10 @@
 
 # Get Startted with the project
 
- `git clone url`
- Run `pip install -r requirements.txt`
- Cd into the greadeasy folder
- Run `pip insatll manage.py makemigrations`
- Run `pip install manage.py migrate`
- Run `pip install manage.py runserver`
+ `git clone url`<br/>
+ Run `pip install -r requirements.txt`<br/>
+ Cd into the greadeasy folder<br/>
+ Run `pip insatll manage.py makemigrations`<br/>
+ Run `pip install manage.py migrate`<br/>
+ Run `pip install manage.py runserver`<br/>
 
